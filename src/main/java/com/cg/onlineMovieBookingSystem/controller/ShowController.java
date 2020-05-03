@@ -10,7 +10,8 @@ import com.cg.onlineMovieBookingSystem.service.ShowService;
 @RequestMapping(value="/show")
 public class ShowController {
 
-	
+//	@Autowired
+//	ShowService showService;
 	
 	
 }

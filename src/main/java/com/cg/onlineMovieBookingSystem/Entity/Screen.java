@@ -1,5 +1,6 @@
 package com.cg.onlineMovieBookingSystem.Entity;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -95,6 +96,19 @@ public class Screen {
 		this.columns = columns;
 	}
 
+	public Show searchShow(String showName){
+		Iterator<Show> it = this.getShowList().iterator();
+		while(it.hasNext()){
+			Show show = it.next();
+			if(show.getShowName().equals(showName)){
+				return show;
+			}
+		}
+		return null;
+	}
 	
+	public List<Show> showShows(){
+		return this.getShowList();
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.Entity;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -138,5 +139,24 @@ public class Booking {
 		this.seatList = seatList;
 	}
 	
+	public double calculateTotalCost(){
+		
+		double amount = 0;
+		Iterator<Seat> seatsIterator = this.getSeatList().iterator();
+		while(seatsIterator.hasNext()){
+			Seat seat = seatsIterator.next();
+			amount += seat.getSeatPrice();
+		}
+		return amount;
+	}
 	
+	public boolean cancelTickets(List<Seat> seats){
+		Iterator<Seat> seatsIterator = this.getSeatList().iterator();
+		while(seatsIterator.hasNext()){
+			Seat seat = seatsIterator.next();
+			seat.setSeatStatus(BookingStatus.AVAILABLE);
+			return true;
+		}
+		return false;
+	}
 }

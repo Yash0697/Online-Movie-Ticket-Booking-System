@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,5 +21,10 @@ public interface TheatreRepository  extends CrudRepository<Theatre, Integer> {
 	
 	@Query(value="select s from Theatre t join t.listOfScreens s where t.theatreId=:tid and s.screenId= :sid")
 	public Screen findByListOfScreens1(@Param("tid") int theatreId, @Param("sid") int screenId); 
+	
+	public Optional<Theatre> findByTheatreName(String theatreName);
+	
+	public List<Theatre> findAllByTheatreCity(String CityName);
+	
 	
 }

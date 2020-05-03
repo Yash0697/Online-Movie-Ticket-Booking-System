@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,10 +39,10 @@ public class Show {
     @JoinColumn(name = "Movie", referencedColumnName = "movieId")
     private Movie movieName;
 	
-	@ManyToOne(targetEntity=Screen.class)
+	//@ManyToOne(targetEntity=Screen.class)
 	private int screenId;
 	
-	@ManyToOne(targetEntity=Screen.class)
+	//@ManyToOne(targetEntity=Screen.class)
 	private int theatreId;
 
 	public Show() {
@@ -127,6 +126,6 @@ public class Show {
 		this.theatreId = theatreId;
 	}
 
-	
+	//public boolean updateSeatStatus()
 	
 }
