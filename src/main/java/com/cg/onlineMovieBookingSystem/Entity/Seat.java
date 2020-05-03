@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -60,5 +59,18 @@ public class Seat {
 		this.seatPrice = seatPrice;
 	}
 	
+	public Enum<BookingStatus> blockSeat(){
+		this.setSeatStatus(BookingStatus.BLOCKED);
+		return this.seatStatus;
+	}
 	
+	public Seat bookSeat(){
+		this.setSeatStatus(BookingStatus.BOOKED);
+		return this;
+	}
+	
+	public Seat cancelSeatBooking(){
+		this.setSeatStatus(BookingStatus.AVAILABLE);
+		return this;
+	}
 }

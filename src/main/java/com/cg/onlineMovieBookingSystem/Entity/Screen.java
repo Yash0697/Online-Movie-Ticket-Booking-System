@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,7 +19,6 @@ public class Screen {
 	@Column(name="screenId")
 	private int screenId;
 	
-	//@ManyToOne(targetEntity=Theatre.class)
 	private int theatreId;
 	
 	@Column(name="screenName")
