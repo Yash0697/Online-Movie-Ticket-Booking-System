@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.onlineMovieBookingSystem.Entity.Screen;
 import com.cg.onlineMovieBookingSystem.Entity.Show;
 import com.cg.onlineMovieBookingSystem.dao.ScreenDao;
 import com.cg.onlineMovieBookingSystem.repository.ShowRepository;
@@ -32,6 +33,17 @@ public class ScreenServiceImpl implements ScreenService {
 		}
 		else
 			return null;
+	}
+
+	@Override
+	public void addScreen(Screen screen) {
+		screenDao.addScreen(screen);
+		
+	}
+
+	@Override
+	public List<Screen> showAllScreens() {
+		return screenDao.showAllScreens();
 	}
 
 }

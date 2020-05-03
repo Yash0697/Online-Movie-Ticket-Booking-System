@@ -34,22 +34,22 @@ public class Ticket {
 	@Column(name="screenName")
 	private String screenName;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "booking", referencedColumnName = "bookingId")
-    private Booking booking;
+//	@OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "booking", referencedColumnName = "bookingId")
+    private int bookingId;
 
 	public Ticket() {
 	}
 
 	public Ticket(int ticketId, int noOfSeats, List<String> seatNames, boolean ticketStatus, String screenName,
-			Booking booking) {
+			int bookingId) {
 		super();
 		this.ticketId = ticketId;
 		this.noOfSeats = noOfSeats;
 		this.seatNames = seatNames;
 		this.ticketStatus = ticketStatus;
 		this.screenName = screenName;
-		this.booking = booking;
+		this.bookingId = bookingId;
 	}
 
 	public int getTicketId() {
@@ -92,12 +92,12 @@ public class Ticket {
 		this.screenName = screenName;
 	}
 
-	public Booking getBooking() {
-		return booking;
+	public int getBooking() {
+		return bookingId;
 	}
 
-	public void setBooking(Booking booking) {
-		this.booking = booking;
+	public void setBooking(int bookingId) {
+		this.bookingId = bookingId;
 	}
 	
 	

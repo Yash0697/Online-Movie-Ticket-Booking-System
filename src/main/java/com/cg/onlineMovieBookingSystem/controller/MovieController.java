@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.onlineMovieBookingSystem.Entity.Show;
-import com.cg.onlineMovieBookingSystem.service.ShowService;
-
+import com.cg.onlineMovieBookingSystem.Entity.Movie;
+import com.cg.onlineMovieBookingSystem.service.MovieService;
 
 @RestController
-@RequestMapping(value="/show")
-public class ShowController {
+@RequestMapping(value="movie")
+public class MovieController {
 
 	@Autowired
-	ShowService showService;
+	MovieService movieService;
+	
 	
 	
 	@GetMapping("/all")
-	public List<Show> showAllShows(){
-		return showService.showAllSeats();
+	public List<Movie> showAllMovies(){
+		return movieService.showAllMovies();
 	}
 	
-	@PostMapping("/addShow")
-	public void addShow(@RequestBody Show show){
-		showService.addShow(show);
+	@PostMapping("/addMovie")
+	public void saveSeat(@RequestBody Movie Movie)
+	{
+		movieService.saveMovie(Movie);
 	}
-	
 }

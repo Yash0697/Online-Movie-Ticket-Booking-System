@@ -18,13 +18,12 @@ public class TheatreDaoImpl implements TheatreDao {
 	TheatreRepository theatreRepository;
 
 	@Override
-	public List<Movie> findMovieByName(Movie movie) {
-		return theatreRepository.findByListOfMovies1(movie.getMovieName());
+	public List<Movie> findMovieByName(int theatreId, Movie movie) {
+		return theatreRepository.findByListOfMovies1(theatreId, movie.getMovieName());
 	}
 
 	@Override
 	public Screen searchScreen(int theatreId, int screenId) {
-		System.out.println("searchScreenDao--------------------------------------------------------------------------------------------");
 		return theatreRepository.findByListOfScreens1(theatreId, screenId);
 	}
 
@@ -36,6 +35,11 @@ public class TheatreDaoImpl implements TheatreDao {
 	@Override
 	public Optional<Theatre> selectByTheatreName(String theatreName) {
 		return theatreRepository.findByTheatreName(theatreName);
+	}
+
+	@Override
+	public List<String> getAllCities() {
+		return theatreRepository.getAllCities();
 	}
 	
 

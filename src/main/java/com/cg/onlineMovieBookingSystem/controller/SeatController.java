@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +26,7 @@ public class SeatController {
 	
 	@GetMapping("/all")
 	public List<Seat> showAll(){
-		return (List<Seat>) seatRepository.findAll();
+		return seatService.getAllSeats();
 	}
 	
 	@GetMapping("/blockSeat")
@@ -51,4 +53,9 @@ public class SeatController {
 			return "ERROR: THIS SEAT DOESN'T EXISTS";
 	}
 	
+	@PostMapping("/addSeat")
+	public void saveSeat(@RequestBody Seat seat)
+	{
+		seatService.saveSeat(seat);
+	}
 }

@@ -9,9 +9,10 @@ import com.cg.onlineMovieBookingSystem.Entity.Theatre;
 
 
 public interface TheatreDao {
-public List<Movie> findMovieByName(Movie movie);
+public List<Movie> findMovieByName(int theatreId, Movie movie);
 public Screen searchScreen(int theatreId, int screenId);
 public List<Theatre> selectByCity(String cityName);
 public Optional<Theatre> selectByTheatreName(String theatreName);
+public List<String> getAllCities();
 
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlineMovieBookingSystem.Entity.Movie;
 import com.cg.onlineMovieBookingSystem.Entity.Screen;
+import com.cg.onlineMovieBookingSystem.Entity.Seat;
+import com.cg.onlineMovieBookingSystem.Entity.Show;
 import com.cg.onlineMovieBookingSystem.Entity.Theatre;
 import com.cg.onlineMovieBookingSystem.repository.TheatreRepository;
 import com.cg.onlineMovieBookingSystem.service.TheatreService;
@@ -30,14 +32,19 @@ public class TheatreController {
 		return (List<Theatre>) repo.findAll();
 		
 	}
-	@GetMapping("/movie")
-	public Movie searchMovie(@RequestParam("movieName") String movieName){
-		return  theatreService.searchMovie(movieName);
+	@GetMapping("/movie/{theatre}/")
+	public Movie searchMovie(@PathVariable("theatre") int theatreId, @RequestParam("movieName") String movieName){
+		return  theatreService.searchMovie(theatreId, movieName);
 	}
 	
-	@GetMapping("/screens")
-	public Screen searchScreen(@RequestParam("theatreId")int theatreId, @RequestParam("screenId") int screenId){
+	@GetMapping("/screen/{theatre}/")
+	public Screen searchScreen(@PathVariable("theatre") int theatreId, @RequestParam("screenId") int screenId){
 		return theatreService.searchScreen(theatreId, screenId);
+	}
+	
+	@GetMapping("/showCities")
+	public List<String> showCities(){
+		return theatreService.showCities();
 	}
 	
 	@GetMapping("/selectByCity")
@@ -58,5 +65,26 @@ public class TheatreController {
 	@GetMapping("/getListOfScreens/{theatre}")
 	public List<Screen> getListOfScreens(@PathVariable("theatre") int theatreId){
 		return theatreService.findScreensInTheatre(theatreId);
+	}
+	
+	
+	@GetMapping("/getScreen/{theatre}/{screen}")
+	public Screen selectScreen(@PathVariable("theatre") int theatreId, @PathVariable("screen") int screenId){
+		return theatreService.selectScreen(theatreId, screenId);
+	}
+	
+	@GetMapping("/getShows/{theatre}/{screen}")
+	public List<Show> getShows(@PathVariable("theatre") int theatreId, @PathVariable("screen") int screenId){
+		return theatreService.findShowsInTheatre(theatreId, screenId);
+	}
+	
+	@GetMapping("/getShow/{theatre}/{screen}/{show}")
+	public Show selectShow(@PathVariable("theatre") int theatreId, @PathVariable("screen") int screenId, @PathVariable("show") int showId){
+		return theatreService.selectShow(theatreId, screenId, showId);
+	}
+	
+	@GetMapping("/getSeats/{theatre}/{screen}/{show}")
+	public List<Seat> showSeats(@PathVariable("theatre") int theatreId, @PathVariable("screen") int screenId, @PathVariable("show") int showId){
+		return theatreService.showSeats(theatreId, screenId, showId);
 	}
 }

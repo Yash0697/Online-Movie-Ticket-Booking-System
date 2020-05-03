@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,10 +26,11 @@ public class Booking {
 	@Column(name="bookingId")
 	private int bookingId;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Ticket", referencedColumnName = "ticketId")
     private Ticket ticket;
 	
-	@ManyToOne(targetEntity=Movie.class)
+	//@ManyToOne(targetEntity=Movie.class)
 	private int movieId;
 	
 	@OneToOne

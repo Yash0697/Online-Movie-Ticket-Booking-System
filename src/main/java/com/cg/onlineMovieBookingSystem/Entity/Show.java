@@ -35,8 +35,7 @@ public class Show {
 	@Column(name="showName")
 	private String showName;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Movie", referencedColumnName = "movieId")
+	@OneToOne
     private Movie movieName;
 	
 	//@ManyToOne(targetEntity=Screen.class)

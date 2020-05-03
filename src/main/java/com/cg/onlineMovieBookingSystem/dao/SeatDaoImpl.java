@@ -1,5 +1,6 @@
 package com.cg.onlineMovieBookingSystem.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,14 @@ public class SeatDaoImpl implements SeatDao{
 			return seat.get();
 		else
 			return null;
+	}
+	@Override
+	public void saveSeat(Seat seat) {
+		seatRepository.save(seat);
+	}
+	@Override
+	public List<Seat> getAllSeats() {
+		return (List<Seat>) seatRepository.findAll();
 	}
 
 }

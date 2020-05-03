@@ -1,5 +1,7 @@
 package com.cg.onlineMovieBookingSystem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,15 @@ public class SeatServiceImpl implements SeatService{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public void saveSeat(Seat seat) {
+		seatDao.saveSeat(seat);
+		
+	}
+	@Override
+	public List<Seat> getAllSeats() {
+		return seatDao.getAllSeats();
 	}
 
 }
