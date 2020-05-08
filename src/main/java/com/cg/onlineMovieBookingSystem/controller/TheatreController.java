@@ -70,6 +70,11 @@ public class TheatreController {
 		return theatreService.selectByMovieName(movieName);
 	}
 	
+	@PostMapping("/selectByMovieAndTheatre")
+	public List<Show> selectByMovieAndTheatre(@RequestBody String movieName, @RequestBody String theatreName){
+		return theatreService.selectByMovieAndTheatre(movieName, theatreName);
+	}
+	
 	@GetMapping("/selectByTheatreName")
 	public Theatre selectByTheatreName(@RequestParam("theatreName")String theatreName){
 		return theatreService.selectByTheatre(theatreName);
@@ -120,4 +125,5 @@ public class TheatreController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
 }
