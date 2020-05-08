@@ -19,4 +19,7 @@ public interface ScreenRepository  extends CrudRepository<Screen, Integer> {
 
 	@Query(value="select sh from Screen sc join sc.showList sh where sc.screenId= :screenId and sh.showId= :showId")
 	public Optional<Show> findShowInScreen(@Param("screenId") int screenId, @Param("showId") int showId);
+
+	@Query(value="select s.showList from Screen s where s.screenId= :screenId")
+	public List<Show> getShowsInScreen(@Param("screenId") int screenId);
 }

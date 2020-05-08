@@ -34,5 +34,13 @@ public interface TheatreService {
 	public List<String> showCities();
 
 	public List<Seat> showSeats(int theatreId, int screenId, int showId);
+
+	public List<Movie> selectMoviesByCityName(String cityName);
+
+	public String addTheatre(Theatre theatre);
+
+	public List<Theatre> selectByMovieName(String movieName);
+
+	public List<Show> selectByMovieAndTheatre(String movieName, String theatreName);
 	
 }

@@ -12,7 +12,9 @@ public interface ScreenService {
 
 	public Show searchShow(String showName );
 
-	public void addScreen(Screen screen);
+	public String addScreen(Screen screen);
 
 	public List<Screen> showAllScreens();
+
+	public List<Show> getShowsInScreen(int screenId);
 }

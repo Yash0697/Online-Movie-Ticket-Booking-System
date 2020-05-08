@@ -13,4 +13,6 @@ public interface ScreenDao {
 
 	public List<Screen> showAllScreens();
 
+	public List<Show> getShowsInScreen(int screenId);
+
 }

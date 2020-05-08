@@ -41,6 +41,27 @@ public class TheatreDaoImpl implements TheatreDao {
 	public List<String> getAllCities() {
 		return theatreRepository.getAllCities();
 	}
+
+	@Override
+	public List<Movie> getMoviesByCityName(String cityName) {
+		return theatreRepository.getMoviesByCityName(cityName);
+	}
+
+	@Override
+	public void addTheatre(Theatre theatre) {
+		theatreRepository.save(theatre);
+		
+	}
+
+	@Override
+	public List<Theatre> selectByMovieName(String movieName) {
+		return theatreRepository.findAllByMovieName(movieName);
+	}
+
+	@Override
+	public List<Screen> selectByMovieAndTheatre(String movieName, String theatreName) {
+		return theatreRepository.selectByMovieAndTheatre( movieName,  theatreName);
+	}
 	
 
 }

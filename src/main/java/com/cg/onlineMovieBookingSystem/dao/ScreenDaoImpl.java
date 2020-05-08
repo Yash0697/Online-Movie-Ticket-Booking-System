@@ -31,4 +31,9 @@ public class ScreenDaoImpl implements ScreenDao {
 		return (List<Screen>) screenRepository.findAll();
 	}
 
+	@Override
+	public List<Show> getShowsInScreen(int screenId) {
+		return screenRepository.getShowsInScreen(screenId);
+	}
+
 }

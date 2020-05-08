@@ -3,8 +3,13 @@ package com.cg.onlineMovieBookingSystem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +23,7 @@ import com.cg.onlineMovieBookingSystem.repository.TheatreRepository;
 import com.cg.onlineMovieBookingSystem.service.TheatreService;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping(value="/theatre")
 public class TheatreController {
 
@@ -29,9 +35,16 @@ public class TheatreController {
 	
 	@GetMapping("/all")
 	public List<Theatre> showAll(){
+		System.out.println("--------------------------------------------------------------------"+"inside asdfghjcvbhj");
 		return (List<Theatre>) repo.findAll();
 		
 	}
+	
+	@GetMapping("/{id}")
+	public Theatre getById(@PathVariable("id") int id){
+		return repo.findById(id).get();
+	}
+	
 	@GetMapping("/movie/{theatre}/")
 	public Movie searchMovie(@PathVariable("theatre") int theatreId, @RequestParam("movieName") String movieName){
 		return  theatreService.searchMovie(theatreId, movieName);
@@ -47,9 +60,14 @@ public class TheatreController {
 		return theatreService.showCities();
 	}
 	
-	@GetMapping("/selectByCity")
-	public List<Theatre> selectByCity(@RequestParam("cityName")String cityName){
+	@PostMapping("/selectByCity")
+	public List<Theatre> selectByCity(@RequestBody String cityName){
 		return theatreService.selectByCityName(cityName);
+	}
+	
+	@PostMapping("/selectByMovieName")
+	public List<Theatre> selectByMovieName(@RequestBody String movieName){
+		return theatreService.selectByMovieName(movieName);
 	}
 	
 	@GetMapping("/selectByTheatreName")
@@ -60,6 +78,11 @@ public class TheatreController {
 	@GetMapping("/getListOfMovies/{theatre}")
 	public List<Movie> getListOfMovies(@PathVariable("theatre") int theatreId){
 		return theatreService.findMoviesInTheatre(theatreId);
+	}
+	
+	@GetMapping("/getListOfMovies/city")
+	public List<Movie> getListOfMovies(@RequestParam("cityName") String cityName){
+		return theatreService.selectMoviesByCityName(cityName);
 	}
 	
 	@GetMapping("/getListOfScreens/{theatre}")
@@ -86,5 +109,15 @@ public class TheatreController {
 	@GetMapping("/getSeats/{theatre}/{screen}/{show}")
 	public List<Seat> showSeats(@PathVariable("theatre") int theatreId, @PathVariable("screen") int screenId, @PathVariable("show") int showId){
 		return theatreService.showSeats(theatreId, screenId, showId);
+	}
+	
+	@PostMapping("/addTheatre")
+	public ResponseEntity<?> addTheatre(@RequestBody Theatre theatre){
+		if(theatreService.addTheatre(theatre).equals("THEATRE ADDED")){
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		else{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 }

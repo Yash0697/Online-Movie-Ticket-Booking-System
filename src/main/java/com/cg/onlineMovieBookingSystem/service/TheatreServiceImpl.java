@@ -1,5 +1,6 @@
 package com.cg.onlineMovieBookingSystem.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,9 @@ public class TheatreServiceImpl implements TheatreService{
 	
 	@Autowired
 	ScreenRepository screenRepository;
+	
+	@Autowired
+	ScreenService screenService;
 	
 	@Autowired
 	ShowService showService;
@@ -132,6 +136,41 @@ public class TheatreServiceImpl implements TheatreService{
 	@Override
 	public List<Seat> showSeats(int theatreId, int screenId, int showId) {
 		return showService.showSeatsInShow(showId);
+	}
+
+	@Override
+	public List<Movie> selectMoviesByCityName(String cityName) {
+		return theatreDao.getMoviesByCityName(cityName);
+	}
+
+	@Override
+	public String addTheatre(Theatre theatre) {
+		List<Screen> screens = theatre.getListOfScreens();
+		Iterator<Screen> it = screens.iterator();
+		while(it.hasNext()){
+			Screen screen = it.next();
+			if(screenRepository.findById(screen.getScreenId()).isPresent()){
+				return "Screen Already Exists";
+			}
+			else{
+				screenService.addScreen(screen);
+			}
+		}
+		theatreRepository.save(theatre);
+		return "THEATRE ADDED";
+	}
+
+	@Override
+	public List<Theatre> selectByMovieName(String movieName) {
+		return theatreDao.selectByMovieName(movieName);
+	}
+
+	@Override
+	public List<Show> selectByMovieAndTheatre(String movieName, String theatreName) {
+		List<Screen> screens = theatreDao.selectByMovieAndTheatre(movieName, theatreName);
+		Screen screen = screens.get(0);
+		List<Show> shows = screenService.getShowsInScreen(screen.getScreenId());
+		return shows;
 	}
 
 	

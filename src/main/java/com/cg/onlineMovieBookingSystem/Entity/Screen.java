@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Screen {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="screenId")
 	private int screenId;
 	

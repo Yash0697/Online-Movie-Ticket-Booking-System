@@ -1,5 +1,6 @@
 package com.cg.onlineMovieBookingSystem.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,9 @@ public class ScreenServiceImpl implements ScreenService {
 
 	@Autowired
 	ShowRepository showRepository;
+	
+	@Autowired
+	ShowService showService;
 	
 	@Autowired
 	ScreenDao screenDao;
@@ -36,14 +40,31 @@ public class ScreenServiceImpl implements ScreenService {
 	}
 
 	@Override
-	public void addScreen(Screen screen) {
+	public String addScreen(Screen screen) {
+		List<Show> shows = screen.getShowList();
+		Iterator<Show> it = shows.iterator();
+		while(it.hasNext()){
+			Show show = it.next();
+			if(showRepository.findById(show.getShowId()).isPresent()){
+				return "SHOW ALREADY EXISTS";
+			}
+			else{
+				showService.addShow(show);
+			}
+		}
 		screenDao.addScreen(screen);
+		return "SCREEN ADDED SUCCESSFULLY";
 		
 	}
 
 	@Override
 	public List<Screen> showAllScreens() {
 		return screenDao.showAllScreens();
+	}
+
+	@Override
+	public List<Show> getShowsInScreen(int screenId) {
+		return screenDao.getShowsInScreen(screenId);
 	}
 
 }

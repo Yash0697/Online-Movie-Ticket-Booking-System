@@ -14,5 +14,9 @@ public Screen searchScreen(int theatreId, int screenId);
 public List<Theatre> selectByCity(String cityName);
 public Optional<Theatre> selectByTheatreName(String theatreName);
 public List<String> getAllCities();
+public List<Movie> getMoviesByCityName(String cityName);
+public void addTheatre(Theatre theatre);
+public List<Theatre> selectByMovieName(String movieName);
+public List<Screen> selectByMovieAndTheatre(String movieName, String theatreName);
 
 }
