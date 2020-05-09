@@ -70,8 +70,8 @@ public class TheatreController {
 		return theatreService.selectByMovieName(movieName);
 	}
 	
-	@PostMapping("/selectByMovieAndTheatre")
-	public List<Show> selectByMovieAndTheatre(@RequestBody String movieName, @RequestBody String theatreName){
+	@GetMapping("/selectByMovieAndTheatre")
+	public List<Show> selectByMovieAndTheatre(@RequestParam("movieName") String movieName, @RequestParam("theatreName") String theatreName){
 		return theatreService.selectByMovieAndTheatre(movieName, theatreName);
 	}
 	
