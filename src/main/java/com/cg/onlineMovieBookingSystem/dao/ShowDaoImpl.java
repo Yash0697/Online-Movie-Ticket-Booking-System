@@ -26,5 +26,9 @@ public class ShowDaoImpl implements ShowDao{
 	public List<Show> showAllSeats() {
 		return (List<Show>) showRepository.findAll();
 	}
+	@Override
+	public List<Show> findShowsByMovieAndTheatre(int movieId, int theatreId) {
+		return showRepository.findShowsByMovieAndTheatre(movieId, theatreId);
+	}
 
 }

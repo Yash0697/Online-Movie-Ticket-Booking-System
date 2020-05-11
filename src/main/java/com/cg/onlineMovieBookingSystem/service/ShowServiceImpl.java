@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cg.onlineMovieBookingSystem.Entity.Seat;
 import com.cg.onlineMovieBookingSystem.Entity.Show;
 import com.cg.onlineMovieBookingSystem.dao.ShowDao;
-import com.cg.onlineMovieBookingSystem.repository.SeatRepository;
+import com.cg.onlineMovieBookingSystem.service.SeatService;
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -18,7 +18,7 @@ public class ShowServiceImpl implements ShowService {
 	ShowDao showDao;
 	
 	@Autowired
-	SeatRepository seatRepository;
+	SeatService seatService;
 	
 	@Override
 	public List<Seat> showSeatsInShow(int showId) {
@@ -35,11 +35,16 @@ public class ShowServiceImpl implements ShowService {
 		List<Seat> seats= show.getSeats();
 		Iterator<Seat> it = seats.iterator();
 		while(it.hasNext()){
-			seatRepository.save(it.next());
-			System.out.println("----------------------------------------------------------------------A Seat ADDED");
+			Seat seat = it.next();
+			seatService.saveSeat(seat);
 		}
 		showDao.addShow(show);
 		
+	}
+
+	@Override
+	public List<Show> findShowsByMovieAndTheatre(int movieId, int theatreId) {
+		return showDao.findShowsByMovieAndTheatre(movieId, theatreId);
 	}
 
 }

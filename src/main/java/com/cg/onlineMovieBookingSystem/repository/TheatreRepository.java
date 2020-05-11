@@ -25,6 +25,9 @@ public interface TheatreRepository  extends CrudRepository<Theatre, Integer> {
 	public Optional<Theatre> findByTheatreName(String theatreName);
 	
 	public List<Theatre> findAllByTheatreCity(String CityName);
+	
+	@Query(value="Select m from Theatre t join t.listOfMovies m where m.movieName= :movieName")
+	public Optional<Movie> findMovieInTheatre(@Param("movieName") String movieName);
 
 	@Query(value="select s from Theatre t join t.listOfScreens s where t.theatreId= :theatreId and s.screenId= :screenId")
 	public Optional<Screen> findScreenInTheatre(@Param("theatreId")int theatreId, @Param("screenId")int screenId);

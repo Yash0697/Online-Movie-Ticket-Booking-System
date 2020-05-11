@@ -20,4 +20,7 @@ public interface ShowRepository  extends CrudRepository<Show, Integer>{
 	
 	@Query(value="select seats from Show s join s.seats seats where s.showId= :showId")
 	List<Seat> showSeatsInShow(@Param("showId") int showId);
+
+	@Query(value="select s from Show s where s.movieName.movieId= :movieId and s.theatreId= :theatreId ")
+	List<Show> findShowsByMovieAndTheatre(@Param("movieId") int movieId, @Param("theatreId") int theatreId);
 }

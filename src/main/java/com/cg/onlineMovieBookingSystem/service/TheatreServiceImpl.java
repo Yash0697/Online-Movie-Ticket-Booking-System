@@ -167,10 +167,15 @@ public class TheatreServiceImpl implements TheatreService{
 
 	@Override
 	public List<Show> selectByMovieAndTheatre(String movieName, String theatreName) {
-		List<Screen> screens = theatreDao.selectByMovieAndTheatre(movieName, theatreName);
-		Screen screen = screens.get(0);
-		List<Show> shows = screenService.getShowsInScreen(screen.getScreenId());
-		return shows;
+		Optional<Theatre> theatreOptional = theatreDao.selectByTheatreName(theatreName);
+		Optional<Movie> movieOptional = theatreRepository.findMovieInTheatre(movieName);
+		if(theatreOptional.isPresent() && movieOptional.isPresent()){
+			int movieId = movieOptional.get().getMovieId();
+			int theatreId = theatreOptional.get().getTheatreId();
+			List<Show> shows = showService.findShowsByMovieAndTheatre(movieId, theatreId);
+			return shows;
+		}
+		return null;
 	}
 
 	

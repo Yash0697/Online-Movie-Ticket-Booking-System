@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlineMovieBookingSystem.Entity.Show;
+import com.cg.onlineMovieBookingSystem.repository.MovieRepository;
 import com.cg.onlineMovieBookingSystem.service.ShowService;
 
 
@@ -20,6 +21,8 @@ public class ShowController {
 	@Autowired
 	ShowService showService;
 	
+	@Autowired
+	MovieRepository movieRepository;
 	
 	@GetMapping("/all")
 	public List<Show> showAllShows(){
@@ -30,5 +33,6 @@ public class ShowController {
 	public void addShow(@RequestBody Show show){
 		showService.addShow(show);
 	}
+	
 	
 }

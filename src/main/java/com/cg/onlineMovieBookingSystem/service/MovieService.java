@@ -11,6 +11,8 @@ public interface MovieService {
 
 	List<Movie> showAllMovies();
 
-	void saveMovie(Movie movie);
+	boolean saveMovie(Movie movie);
+
+	void deleteById(int id);
 
 }

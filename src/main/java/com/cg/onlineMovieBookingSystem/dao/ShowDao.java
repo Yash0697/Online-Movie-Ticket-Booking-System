@@ -13,5 +13,7 @@ public interface ShowDao {
 	void addShow(Show show);
 
 	List<Show> showAllSeats();
+
+	List<Show> findShowsByMovieAndTheatre(int movieId, int theatreId);
 	
 }

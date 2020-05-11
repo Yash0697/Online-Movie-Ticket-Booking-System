@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +38,17 @@ public class MovieController {
 	}
 	
 	@PostMapping("/addMovie")
-	public void saveSeat(@RequestBody Movie Movie)
+	public boolean saveMovie(@RequestBody Movie movie)
 	{
-		movieService.saveMovie(Movie);
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++In Controller"+movie.getMovieDirector());
+		if(movieService.saveMovie(movie))
+			return true;
+		else
+			return false;
+	}
+	
+	@DeleteMapping(path ={"delete/{id}"})
+	public void deleteMovie(@PathVariable("id") int id){
+		movieService.deleteById(id);
 	}
 }

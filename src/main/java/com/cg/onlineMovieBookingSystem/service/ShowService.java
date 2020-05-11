@@ -16,4 +16,6 @@ public interface ShowService {
 	
 	public void addShow(Show show);
 
+	public List<Show> findShowsByMovieAndTheatre(int movieId, int theatreId);
+	
 }

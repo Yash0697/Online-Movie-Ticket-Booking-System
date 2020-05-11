@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,22 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public void saveMovie(Movie movie) {
+	public boolean saveMovie(Movie movie) {
+		
+		Optional<Movie> movieOptional = movieDao.getById(movie.getMovieId());
+		if(movieOptional.isPresent()){
+			return false;
+		}
+		else{
 		movieDao.saveMovie(movie);
+		return true;
+		}
+		
+	}
+
+	@Override
+	public void deleteById(int id) {
+		movieDao.deleteById(id);
 		
 	}
 

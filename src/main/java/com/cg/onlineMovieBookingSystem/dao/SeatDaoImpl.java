@@ -26,6 +26,7 @@ public class SeatDaoImpl implements SeatDao{
 	public void saveSeat(Seat seat) {
 		seatRepository.save(seat);
 	}
+	
 	@Override
 	public List<Seat> getAllSeats() {
 		return (List<Seat>) seatRepository.findAll();

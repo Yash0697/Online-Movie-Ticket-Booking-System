@@ -3,6 +3,7 @@ package com.cg.onlineMovieBookingSystem.Entity;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Screen {
 	@Column(name="screenName")
 	private String screenName;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
 	private List<Show> showList;
 	
 	@Column(name="rows1")

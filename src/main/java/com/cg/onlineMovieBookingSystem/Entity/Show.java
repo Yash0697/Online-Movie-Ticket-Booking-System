@@ -3,6 +3,7 @@ package com.cg.onlineMovieBookingSystem.Entity;
 import java.sql.Time;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Show {
 	@Column(name="showName")
 	private String showName;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REMOVE, orphanRemoval = true)
     private Movie movieName;
 	
 	//@ManyToOne(targetEntity=Screen.class)

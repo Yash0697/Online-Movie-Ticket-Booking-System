@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,17 @@ public class MovieDaoImpl implements MovieDao{
 	public void saveMovie(Movie movie) {
 		movieRepository.save(movie);
 		
+	}
+
+	@Override
+	public void deleteById(int id) {
+		movieRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public Optional<Movie> getById(int movieId) {
+		return movieRepository.findById(movieId);
 	}
 	
 	

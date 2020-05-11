@@ -33,9 +33,10 @@ public class TheatreController {
 	@Autowired
 	TheatreRepository repo;
 	
+	
+	
 	@GetMapping("/all")
 	public List<Theatre> showAll(){
-		System.out.println("--------------------------------------------------------------------"+"inside asdfghjcvbhj");
 		return (List<Theatre>) repo.findAll();
 		
 	}
@@ -125,5 +126,5 @@ public class TheatreController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 }

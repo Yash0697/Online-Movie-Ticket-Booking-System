@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlineMovieBookingSystem.Entity.Seat;
-import com.cg.onlineMovieBookingSystem.repository.SeatRepository;
 import com.cg.onlineMovieBookingSystem.service.SeatService;
 
 @RestController
@@ -21,8 +20,6 @@ public class SeatController {
 	@Autowired
 	SeatService seatService;
 	
-	@Autowired
-	SeatRepository seatRepository;
 	
 	@GetMapping("/all")
 	public List<Seat> showAll(){

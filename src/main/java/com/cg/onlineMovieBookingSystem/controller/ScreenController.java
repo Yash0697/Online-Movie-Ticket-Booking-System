@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.onlineMovieBookingSystem.Entity.Movie;
 import com.cg.onlineMovieBookingSystem.Entity.Screen;
 import com.cg.onlineMovieBookingSystem.Entity.Show;
 import com.cg.onlineMovieBookingSystem.repository.ScreenRepository;
+import com.cg.onlineMovieBookingSystem.repository.ShowRepository;
 import com.cg.onlineMovieBookingSystem.service.ScreenService;
 
 @RestController
@@ -26,6 +26,10 @@ public class ScreenController {
 	
 	@Autowired
 	ScreenRepository screenRepository;
+	
+	@Autowired
+	ShowRepository showRepo;
+	
 	
 	@GetMapping("/searchShow")
 	public String searchShow(@RequestParam("showName") String showName){
@@ -51,6 +55,15 @@ public class ScreenController {
 	@PostMapping("/addScreen")
 	public void addScreen(@RequestBody Screen screen){
 		screenService.addScreen(screen);
+	}
+	
+	@PostMapping("/addShowToScreen")
+	public void p(@RequestBody Show show)
+	{
+		Screen s = screenRepository.findById(72).get();
+		showRepo.save(show);
+		s.getShowList().add(show);
+		screenRepository.save(s);
 	}
 	
 }
