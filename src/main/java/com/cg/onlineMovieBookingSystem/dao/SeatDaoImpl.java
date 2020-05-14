@@ -31,5 +31,10 @@ public class SeatDaoImpl implements SeatDao{
 	public List<Seat> getAllSeats() {
 		return (List<Seat>) seatRepository.findAll();
 	}
+	@Override
+	public void deleteById(int seatId) {
+		seatRepository.deleteById(seatId);
+		
+	}
 
 }

@@ -4,16 +4,16 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 
 @Entity
@@ -21,18 +21,13 @@ import javax.persistence.Table;
 public class Booking {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="bookingId")
 	private int bookingId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Ticket", referencedColumnName = "ticketId")
-    private Ticket ticket;
 	
-	//@ManyToOne(targetEntity=Movie.class)
 	private int movieId;
 	
-	@OneToOne
+	@ManyToOne
 	private Show showRef;
 	
 	@Column(name="showId")
@@ -43,6 +38,7 @@ public class Booking {
 	
 	
 	@Column(name="transactionId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private int transactionId;
 	
 	@Column(name="totalCost")
@@ -50,16 +46,25 @@ public class Booking {
 	
 	@OneToMany(targetEntity=Seat.class)
 	private List<Seat> seatList;
+	
+	int userId;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public Booking() {
 		
 	}
 
-	public Booking(int bookingId, Ticket ticket, int movieId, Show showRef, int showId, LocalDate bookingDate,
+	public Booking(int bookingId, int movieId, Show showRef, int showId, LocalDate bookingDate,
 			int transactionId, double totalCost, List<Seat> seatList) {
 		super();
 		this.bookingId = bookingId;
-		this.ticket = ticket;
 		this.movieId = movieId;
 		this.showRef = showRef;
 		this.showId = showId;
@@ -75,14 +80,6 @@ public class Booking {
 
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
-	}
-
-	public Ticket getTicket() {
-		return ticket;
-	}
-
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
 	}
 
 	public int getMovieId() {

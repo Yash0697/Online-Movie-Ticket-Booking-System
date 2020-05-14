@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,18 @@ public interface TheatreService {
 	public List<Theatre> selectByMovieName(String movieName);
 
 	public List<Show> selectByMovieAndTheatre(String movieName, String theatreName);
+
+	public List<Theatre> findAll();
+
+	public Optional<Theatre> findByScreenId(int screenId);
+	
+     public List<Movie> searchMovieByTheater(String theatreName);
+	
+	public List<Movie> searchTheaterByMovie(String theatreCity);
+
+	public List<String> findAllCities();
+
+	public List<String> findAllTheatres();
+
 	
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.onlineMovieBookingSystem.Entity.Movie;
-import com.cg.onlineMovieBookingSystem.repository.MovieRepository;
 import com.cg.onlineMovieBookingSystem.service.MovieService;
 
 @RestController
@@ -24,23 +23,15 @@ public class MovieController {
 	@Autowired
 	MovieService movieService;
 	
-	@Autowired
-	MovieRepository movieRepository;
 	
 	@GetMapping("/all")
 	public List<Movie> showAllMovies(){
 		return movieService.showAllMovies();
 	}
 	
-	@GetMapping("/{id}")
-	public Movie getById(@PathVariable("id") int id){
-		return movieRepository.findById(id).get();
-	}
-	
 	@PostMapping("/addMovie")
 	public boolean saveMovie(@RequestBody Movie movie)
 	{
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++In Controller"+movie.getMovieDirector());
 		if(movieService.saveMovie(movie))
 			return true;
 		else

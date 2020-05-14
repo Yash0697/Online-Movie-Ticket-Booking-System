@@ -16,12 +16,12 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="Movie")
-@OnDelete(action=OnDeleteAction.CASCADE)
 public class Movie {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="movieId")
+	//@OnDelete(action=OnDeleteAction.CASCADE)
 	private int movieId;
 	
 	@Column(name="movieName")

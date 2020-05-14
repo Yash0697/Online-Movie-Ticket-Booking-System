@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,6 +35,16 @@ public class ScreenDaoImpl implements ScreenDao {
 	@Override
 	public List<Show> getShowsInScreen(int screenId) {
 		return screenRepository.getShowsInScreen(screenId);
+	}
+
+	@Override
+	public Optional<Show> findShowInScreen(int screenId, int showId) {
+		return screenRepository.findShowInScreen(screenId, showId);
+	}
+
+	@Override
+	public Optional<Screen> findById(int screenId) {
+		return screenRepository.findById(screenId);
 	}
 
 }

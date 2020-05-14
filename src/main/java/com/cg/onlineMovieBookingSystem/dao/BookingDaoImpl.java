@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,10 @@ public class BookingDaoImpl implements BookingDao {
 	@Override
 	public void saveBooking(Booking booking) {
 		bookingRepository.save(booking);
+	}
+	@Override
+	public Optional<Booking> findBuId(int bookingId) {
+		return bookingRepository.findById(bookingId);
 	}
 
 }

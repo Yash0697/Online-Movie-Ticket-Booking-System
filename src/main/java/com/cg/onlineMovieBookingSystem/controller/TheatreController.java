@@ -30,20 +30,10 @@ public class TheatreController {
 	@Autowired
 	TheatreService theatreService;
 	
-	@Autowired
-	TheatreRepository repo;
-	
-	
-	
 	@GetMapping("/all")
 	public List<Theatre> showAll(){
-		return (List<Theatre>) repo.findAll();
+		return theatreService.findAll();
 		
-	}
-	
-	@GetMapping("/{id}")
-	public Theatre getById(@PathVariable("id") int id){
-		return repo.findById(id).get();
 	}
 	
 	@GetMapping("/movie/{theatre}/")
@@ -56,10 +46,6 @@ public class TheatreController {
 		return theatreService.searchScreen(theatreId, screenId);
 	}
 	
-	@GetMapping("/showCities")
-	public List<String> showCities(){
-		return theatreService.showCities();
-	}
 	
 	@PostMapping("/selectByCity")
 	public List<Theatre> selectByCity(@RequestBody String cityName){
@@ -126,5 +112,31 @@ public class TheatreController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	@GetMapping("/getByTheatre/{theatreName}")
+	public List<Movie> searchMovieByTheater(@PathVariable(value="theatreName") String theatreName){
+		return  theatreService.searchMovieByTheater(theatreName);
+		
+	}
+
+	
+
+	@GetMapping("/getByCity/{theatreCity}")
+	public List<Movie> searchMovierByCity(@PathVariable(value="theatreCity") String theatreCity)
+	{
+		return  theatreService.searchTheaterByMovie(theatreCity);
+		
+
+	}
+	@GetMapping("allCities")
+	public List<String> getAllCities(){
+		return  theatreService.findAllCities();
+	}
+
+	@GetMapping("allTheatres")
+	public List<String> getAllTheatre()
+	{
+		return theatreService.findAllTheatres();
+	}
+	
 
 }

@@ -11,4 +11,6 @@ public interface SeatDao {
 	public void saveSeat(Seat seat);
 	
 	public List<Seat> getAllSeats();
+
+	public void deleteById(int seatId);
 }

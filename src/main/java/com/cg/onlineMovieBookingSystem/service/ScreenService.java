@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -17,4 +18,8 @@ public interface ScreenService {
 	public List<Screen> showAllScreens();
 
 	public List<Show> getShowsInScreen(int screenId);
+
+	public Optional<Show> findShowInScreen(int screenId, int showId);
+
+	public Optional<Screen> findById(int screenId);
 }

@@ -1,6 +1,7 @@
 package com.cg.onlineMovieBookingSystem.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,19 @@ public class ShowDaoImpl implements ShowDao{
 	@Override
 	public List<Show> findShowsByMovieAndTheatre(int movieId, int theatreId) {
 		return showRepository.findShowsByMovieAndTheatre(movieId, theatreId);
+	}
+	@Override
+	public Optional<Show> findByName(String showName) {
+		return showRepository.findByName(showName);
+	}
+	@Override
+	public Optional<Show> findById(int showId) {
+		return showRepository.findById(showId);
+	}
+	@Override
+	public void deleteById(int id) {
+		showRepository.deleteById(id);
+		
 	}
 
 }

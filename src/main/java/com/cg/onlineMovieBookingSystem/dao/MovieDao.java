@@ -15,4 +15,6 @@ public interface MovieDao {
 
 	Optional<Movie> getById(int movieId);
 
+	Optional<Movie> findByMovieName(String movieName);
+
 }

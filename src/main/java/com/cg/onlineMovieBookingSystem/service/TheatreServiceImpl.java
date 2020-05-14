@@ -13,9 +13,7 @@ import com.cg.onlineMovieBookingSystem.Entity.Seat;
 import com.cg.onlineMovieBookingSystem.Entity.Show;
 import com.cg.onlineMovieBookingSystem.Entity.Theatre;
 import com.cg.onlineMovieBookingSystem.dao.TheatreDao;
-import com.cg.onlineMovieBookingSystem.repository.MovieRepository;
-import com.cg.onlineMovieBookingSystem.repository.ScreenRepository;
-import com.cg.onlineMovieBookingSystem.repository.TheatreRepository;
+
 
 @Service
 public class TheatreServiceImpl implements TheatreService{
@@ -24,13 +22,8 @@ public class TheatreServiceImpl implements TheatreService{
 	TheatreDao theatreDao;
 	
 	@Autowired
-	MovieRepository movieRepository;
+	MovieService movieService;
 	
-	@Autowired
-	TheatreRepository theatreRepository;
-	
-	@Autowired
-	ScreenRepository screenRepository;
 	
 	@Autowired
 	ScreenService screenService;
@@ -40,7 +33,7 @@ public class TheatreServiceImpl implements TheatreService{
 	
 	@Override
 	public Movie searchMovie(int theatreId, String movieName) {
-		Optional<Movie> movieOptional = movieRepository.findByMovieName(movieName);
+		Optional<Movie> movieOptional = movieService.findByMovieName(movieName);
 		if(movieOptional.isPresent()){
 		List<Movie> movies = theatreDao.findMovieByName(theatreId, movieOptional.get());
 		if(movies.size()>0){
@@ -81,7 +74,7 @@ public class TheatreServiceImpl implements TheatreService{
 
 	@Override
 	public List<Movie> findMoviesInTheatre(int theatreId) {
-		Optional<Theatre> theatreOptional = theatreRepository.findById(theatreId);
+		Optional<Theatre> theatreOptional = theatreDao.findById(theatreId);
 		if(theatreOptional.isPresent()){
 			return theatreOptional.get().getListOfMovies();
 		}
@@ -90,7 +83,7 @@ public class TheatreServiceImpl implements TheatreService{
 
 	@Override
 	public List<Screen> findScreensInTheatre(int theatreId) {
-		Optional<Theatre> theatreOptional = theatreRepository.findById(theatreId);
+		Optional<Theatre> theatreOptional = theatreDao.findById(theatreId);
 		if(theatreOptional.isPresent()){
 			return theatreOptional.get().getListOfScreens();
 		}
@@ -99,7 +92,7 @@ public class TheatreServiceImpl implements TheatreService{
 
 	@Override
 	public List<Show> findShowsInTheatre(int theatreId, int screenId) {
-		Optional<Screen> screenOptional = theatreRepository.findScreenInTheatre(theatreId, screenId);
+		Optional<Screen> screenOptional = theatreDao.findScreenInTheatre(theatreId, screenId);
 		if(screenOptional.isPresent()){
 			return screenOptional.get().getShowList();
 		}
@@ -108,9 +101,9 @@ public class TheatreServiceImpl implements TheatreService{
 
 	@Override
 	public Show selectShow(int theatreId, int screenId, int showId) {
-		Optional<Screen> screenOptional = theatreRepository.findScreenInTheatre(theatreId, screenId);
+		Optional<Screen> screenOptional = theatreDao.findScreenInTheatre(theatreId, screenId);
 		if(screenOptional.isPresent()){
-			Optional<Show> showOptional = screenRepository.findShowInScreen(screenId, showId);
+			Optional<Show> showOptional = screenService.findShowInScreen(screenId, showId);
 			if(showOptional.isPresent()){
 				return showOptional.get();
 			}
@@ -120,7 +113,7 @@ public class TheatreServiceImpl implements TheatreService{
 
 	@Override
 	public Screen selectScreen(int theatreId, int screenId) {
-		Optional<Screen> screenOptional = theatreRepository.findScreenInTheatre(theatreId, screenId);
+		Optional<Screen> screenOptional = theatreDao.findScreenInTheatre(theatreId, screenId);
 		if(screenOptional.isPresent()){
 			return screenOptional.get();
 		}
@@ -149,14 +142,14 @@ public class TheatreServiceImpl implements TheatreService{
 		Iterator<Screen> it = screens.iterator();
 		while(it.hasNext()){
 			Screen screen = it.next();
-			if(screenRepository.findById(screen.getScreenId()).isPresent()){
+			if(screenService.findById(screen.getScreenId()).isPresent()){
 				return "Screen Already Exists";
 			}
 			else{
 				screenService.addScreen(screen);
 			}
 		}
-		theatreRepository.save(theatre);
+		theatreDao.save(theatre);
 		return "THEATRE ADDED";
 	}
 
@@ -168,7 +161,7 @@ public class TheatreServiceImpl implements TheatreService{
 	@Override
 	public List<Show> selectByMovieAndTheatre(String movieName, String theatreName) {
 		Optional<Theatre> theatreOptional = theatreDao.selectByTheatreName(theatreName);
-		Optional<Movie> movieOptional = theatreRepository.findMovieInTheatre(movieName);
+		Optional<Movie> movieOptional = theatreDao.findMovieInTheatre(movieName);
 		if(theatreOptional.isPresent() && movieOptional.isPresent()){
 			int movieId = movieOptional.get().getMovieId();
 			int theatreId = theatreOptional.get().getTheatreId();
@@ -178,5 +171,36 @@ public class TheatreServiceImpl implements TheatreService{
 		return null;
 	}
 
+	@Override
+	public List<Theatre> findAll() {
+		return theatreDao.findAll();
+	}
+
+	@Override
+	public Optional<Theatre> findByScreenId(int screenId) {
+		return theatreDao.findByScreenId(screenId);
+	}
+
+	@Override
+	public List<Movie> searchMovieByTheater(String theatreName) {
+		
+		return theatreDao.findMovieByTheaterName1(theatreName);
+	}
+
+	@Override
+	public List<Movie> searchTheaterByMovie(String theatreCity) {
+		
+		return theatreDao.findTheatreByTheaterCity1(theatreCity);
+	}
+
+	@Override
+	public List<String> findAllCities() {
+		return theatreDao.getAllCities();
+	}
+
+	@Override
+	public List<String> findAllTheatres() {
+		return theatreDao.findAllTheatres();
+	}
 	
 }

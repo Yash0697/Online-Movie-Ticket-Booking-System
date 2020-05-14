@@ -11,6 +11,6 @@ public interface BookingService {
 
 	List<Booking> findAllBookings();
 
-	void saveBooking(Booking booking);
+	boolean saveBooking(Booking booking);
 
 }

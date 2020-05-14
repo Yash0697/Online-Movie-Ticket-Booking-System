@@ -18,5 +18,15 @@ public List<Movie> getMoviesByCityName(String cityName);
 public void addTheatre(Theatre theatre);
 public List<Theatre> selectByMovieName(String movieName);
 public List<Screen> selectByMovieAndTheatre(String movieName, String theatreName);
+public List<Theatre> findAll();
+public Optional<Theatre> findById(int theatreId);
+public Optional<Screen> findScreenInTheatre(int theatreId, int screenId);
+public void save(Theatre theatre);
+public Optional<Movie> findMovieInTheatre(String movieName);
+public Optional<Theatre> findByScreenId(int screenId);
+public List<Movie> findMovieByTheaterName1(String theatreName);
+
+public List<Movie> findTheatreByTheaterCity1(String theatreCity);
+public List<String> findAllTheatres();
 
 }

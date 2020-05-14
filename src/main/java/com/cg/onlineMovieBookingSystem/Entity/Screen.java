@@ -26,7 +26,7 @@ public class Screen {
 	@Column(name="screenName")
 	private String screenName;
 	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	private List<Show> showList;
 	
 	@Column(name="rows1")

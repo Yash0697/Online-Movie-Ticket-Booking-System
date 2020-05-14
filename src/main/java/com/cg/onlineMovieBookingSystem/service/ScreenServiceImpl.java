@@ -10,13 +10,10 @@ import org.springframework.stereotype.Service;
 import com.cg.onlineMovieBookingSystem.Entity.Screen;
 import com.cg.onlineMovieBookingSystem.Entity.Show;
 import com.cg.onlineMovieBookingSystem.dao.ScreenDao;
-import com.cg.onlineMovieBookingSystem.repository.ShowRepository;
 
 @Service
 public class ScreenServiceImpl implements ScreenService {
 
-	@Autowired
-	ShowRepository showRepository;
 	
 	@Autowired
 	ShowService showService;
@@ -26,7 +23,7 @@ public class ScreenServiceImpl implements ScreenService {
 	
 	@Override
 	public Show searchShow(String showName) {
-		Optional<Show> showOptional = showRepository.findByName(showName);
+		Optional<Show> showOptional = showService.findByName(showName);
 		if(showOptional.isPresent()){
 		List<Show> shows = screenDao.findShowByShowName(showOptional.get());
 		if(shows.size()>0){
@@ -45,7 +42,7 @@ public class ScreenServiceImpl implements ScreenService {
 		Iterator<Show> it = shows.iterator();
 		while(it.hasNext()){
 			Show show = it.next();
-			if(showRepository.findById(show.getShowId()).isPresent()){
+			if(showService.findById(show.getShowId()).isPresent()){
 				return "SHOW ALREADY EXISTS";
 			}
 			else{
@@ -65,6 +62,16 @@ public class ScreenServiceImpl implements ScreenService {
 	@Override
 	public List<Show> getShowsInScreen(int screenId) {
 		return screenDao.getShowsInScreen(screenId);
+	}
+
+	@Override
+	public Optional<Show> findShowInScreen(int screenId, int showId) {
+		return screenDao.findShowInScreen(screenId, showId);
+	}
+	
+	@Override
+	public Optional<Screen> findById(int screenId) {
+		return screenDao.findById(screenId);
 	}
 
 }

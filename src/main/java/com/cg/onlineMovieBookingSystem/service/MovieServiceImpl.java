@@ -39,4 +39,9 @@ public class MovieServiceImpl implements MovieService{
 		
 	}
 
+	@Override
+	public Optional<Movie> findByMovieName(String movieName) {
+		return movieDao.findByMovieName(movieName);
+	}
+
 }

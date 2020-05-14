@@ -17,6 +17,7 @@ public class SeatServiceImpl implements SeatService{
 	
 	@Autowired
 	SeatRepository seatRepository;
+	
 	@Override
 	public boolean blockSeat(int seatId) {
 		Seat seat = seatDao.getSeat(seatId);
@@ -45,8 +46,8 @@ public class SeatServiceImpl implements SeatService{
 		Seat seat = seatDao.getSeat(seatId);
 		if(seat != null){
 			seat.cancelSeatBooking();
-			seatRepository.deleteById(seatId);
-			seatRepository.save(seat);
+			seatDao.deleteById(seatId);
+			seatDao.saveSeat(seat);
 			return true;
 		}
 		return false;

@@ -36,6 +36,11 @@ public class MovieDaoImpl implements MovieDao{
 	public Optional<Movie> getById(int movieId) {
 		return movieRepository.findById(movieId);
 	}
+
+	@Override
+	public Optional<Movie> findByMovieName(String movieName) {
+		return movieRepository.findByMovieName(movieName);
+	}
 	
 	
 }

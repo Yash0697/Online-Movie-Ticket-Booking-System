@@ -26,10 +26,10 @@ public class Theatre {
 	@Column(name="theatreCity")
 	private String theatreCity;
 	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany( orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<Movie> listOfMovies;
 	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany( orphanRemoval = true, cascade = CascadeType.PERSIST)
 	private List<Screen> listOfScreens;
 	
 	@Column(name="managerName")

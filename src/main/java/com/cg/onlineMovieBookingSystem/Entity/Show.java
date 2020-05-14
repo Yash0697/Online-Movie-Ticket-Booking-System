@@ -1,17 +1,19 @@
 package com.cg.onlineMovieBookingSystem.Entity;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="Show1")
@@ -20,13 +22,14 @@ public class Show {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="showId")
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	private int showId;
 	
 	@Column(name="showStartTime")
-	private Time showStartTime;
+	private LocalTime showStartTime;
 	
 	@Column(name="showEndTime")
-	private Time showEndTime;
+	private LocalTime showEndTime;
 	
 	@OneToMany(targetEntity=Seat.class)
 	private List<Seat> seats;
@@ -34,7 +37,7 @@ public class Show {
 	@Column(name="showName")
 	private String showName;
 	
-	@OneToOne(cascade=CascadeType.REMOVE, orphanRemoval = true)
+	@ManyToOne
     private Movie movieName;
 	
 	//@ManyToOne(targetEntity=Screen.class)
@@ -47,7 +50,7 @@ public class Show {
 		super();
 	}
 
-	public Show(int showId, Time showStartTime, Time showEndTime, List<Seat> seats, String showName, Movie movieName,
+	public Show(int showId, LocalTime showStartTime, LocalTime showEndTime, List<Seat> seats, String showName, Movie movieName,
 			int screenId, int theatreId) {
 		super();
 		this.showId = showId;
@@ -68,19 +71,19 @@ public class Show {
 		this.showId = showId;
 	}
 
-	public Time getShowStartTime() {
+	public LocalTime getShowStartTime() {
 		return showStartTime;
 	}
 
-	public void setShowStartTime(Time showStartTime) {
+	public void setShowStartTime(LocalTime showStartTime) {
 		this.showStartTime = showStartTime;
 	}
 
-	public Time getShowEndTime() {
+	public LocalTime getShowEndTime() {
 		return showEndTime;
 	}
 
-	public void setShowEndTime(Time showEndTime) {
+	public void setShowEndTime(LocalTime showEndTime) {
 		this.showEndTime = showEndTime;
 	}
 
